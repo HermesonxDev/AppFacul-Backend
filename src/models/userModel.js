@@ -10,20 +10,20 @@ exports.getAll = () => {
     }
 }
 
-exports.create = (name, password, type) => {
+exports.create = (email, password, type) => {
     try {
-        const insert = db.prepare('INSERT INTO users (name, password, type) VALUES (?, ?, ?)')
-        const result = insert.run(name, password, type)
-        return { message: "Usuário criado com sucesso", userData: { id: result.lastInsertRowid, name, password, type }}
+        const insert = db.prepare('INSERT INTO users (email, password, type) VALUES (?, ?, ?)')
+        const result = insert.run(email, password, type)
+        return { message: "Usuário criado com sucesso", userData: { id: result.lastInsertRowid, email, password, type }}
     } catch (error) {
         return { message: "Erro ao criar usuário", error: String(error) }
     }
 }
 
-exports.update = (id, name, password, type) => {
+exports.update = (id, email, password, type) => {
     try {
-        const update = db.prepare('UPDATE users SET name = ?, password = ?, type = ? WHERE id = ?')
-        const result = update.run(name, password, type, id)
+        const update = db.prepare('UPDATE users SET email = ?, password = ?, type = ? WHERE id = ?')
+        const result = update.run(email, password, type, id)
         
         if (result.changes > 0) {
             return { message: "Usuário atualizado com sucesso!" }
@@ -47,5 +47,20 @@ exports.delete = (id) => {
         }
     } catch (error) {
         return { message: "Erro ao deletar usuário", error: String(error) }
+    }
+}
+
+exports.findByEmail = (email) => {
+    try {
+        const query = db.prepare('SELECT * FROM users WHERE email = ?')
+        const user = query.get(email);
+
+        if (user) {
+            return { exists: true, user };
+        } else {
+            return { exists: false, message: "Usuário não encontrado" };
+        }
+    } catch (error) {
+        return { exists: false, message: "Erro ao verificar usuário", error: String(error) }
     }
 }
