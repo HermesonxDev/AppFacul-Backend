@@ -10,20 +10,20 @@ exports.getAll = () => {
     }
 }
 
-exports.create = (email, password, type) => {
+exports.create = (name, email, password, type) => {
     try {
-        const insert = db.prepare('INSERT INTO users (email, password, type) VALUES (?, ?, ?)')
-        const result = insert.run(email, password, type)
-        return { message: "Usuário criado com sucesso", userData: { id: result.lastInsertRowid, email, password, type }}
+        const insert = db.prepare('INSERT INTO users (name, email, password, type) VALUES (?, ?, ?, ?)')
+        const result = insert.run(name, email, password, type)
+        return { message: "Usuário criado com sucesso", userData: { id: result.lastInsertRowid, name, email, password, type }}
     } catch (error) {
         return { message: "Erro ao criar usuário", error: String(error) }
     }
 }
 
-exports.update = (id, email, password, type) => {
+exports.update = (id, name, email, password, type) => {
     try {
-        const update = db.prepare('UPDATE users SET email = ?, password = ?, type = ? WHERE id = ?')
-        const result = update.run(email, password, type, id)
+        const update = db.prepare('UPDATE users SET name = ?, email = ?, password = ?, type = ? WHERE id = ?')
+        const result = update.run(name, email, password, type, id)
         
         if (result.changes > 0) {
             return { message: "Usuário atualizado com sucesso!" }

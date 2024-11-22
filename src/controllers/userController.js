@@ -6,15 +6,15 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    const { email, password, type } = req.body
-    const result = userService.createUser(email, password, type)
+    const { name, email, password, type } = req.body
+    const result = userService.createUser(name, email, password, type)
     res.status(201).json(result)
 }
 
 exports.updateUser = (req, res) => {
     const { id } = req.params
-    const { email, password, type } = req.body
-    const result = userService.updateUser(id, email, password, type)
+    const { name, email, password, type } = req.body
+    const result = userService.updateUser(id, name, email, password, type)
     res.json(result)
 }
 

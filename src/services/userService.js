@@ -4,12 +4,12 @@ exports.getAllUsers = () => {
     return userModel.getAll()
 }
 
-exports.createUser = (email, password, type) => {
-    return userModel.create(email, password, type)
+exports.createUser = (name, email, password, type) => {
+    return userModel.create(name, email, password, type)
 }
 
-exports.updateUser = (id, email, password, type) => {
-    return userModel.update(id, email, password, type)
+exports.updateUser = (id, name, email, password, type) => {
+    return userModel.update(id, name, email, password, type)
 }
 
 exports.deleteUser = (id) => {
