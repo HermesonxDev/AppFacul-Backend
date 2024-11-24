@@ -5,7 +5,11 @@
 
 2 - Instale as dependencias usando "yarn install" ou "npm install".
 
-3 - Digite "yarn dev" ou "npm dev" para iniciar a aplicação.
+3 - Copie o arquivo .env.example, dele o ".example" e preencha os dados que ele pede.
+
+4 - Digite "yarn dev" ou "npm dev" para iniciar a aplicação.
+
+OBS: Para o front-end funcionar corretamente essa aplicação deve estar rodando.
 
 # O que acontece em seguida?
 
